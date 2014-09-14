@@ -1,0 +1,30 @@
+import requests #pip install
+from unidecode import unidecode
+import lxml.html #pip install
+import urllib
+
+p = "http://oag.ca.gov/missing/stats"
+r = requests.get(p)
+#print type(r.text)
+text = unidecode(r.text)
+#print type(text)
+
+#print text[18500:] #this is a terrible idea
+
+html_obj = lxml.html.fromstring(text)
+links = html_obj.xpath("//a")
+links_values = [elem.values() for elem in links]
+links_l = []
+for i in links_values:
+    for item in i:
+        if '.pdf' in item:
+            links_l.append(item)
+links_l = sorted(links_l)
+pdfs = []
+for i in links_l:
+    if not 'http' in i:
+        j = 'http://oag.ca.gov' + i
+    pdfs.append(j)
+
+for i in range(0,len(pdfs)):
+    urllib.urlretrieve(pdfs[i], '/Users/eduardofranco/Documents/NYU/Python_BootCamp/test'+str(i)+'.pdf')
