@@ -1,0 +1,18 @@
+import pyPdf
+
+def getPDFContent(path):
+    content = ""
+    # Load PDF into pyPDF
+    pdf = pyPdf.PdfFileReader(file(path, "rb"))
+    # Iterate pages
+    for i in range(0, pdf.getNumPages()):
+        # Extract text from page and add to content
+        content += pdf.getPage(i).extractText() + "\n"
+    # Collapse whitespace
+    content = " ".join(content.replace(u"\xa0", " ").strip().split())
+    #return content
+    txtfile = open('/Users/eduardofranco/Documents/NYU/Python_BootCamp/test0.txt','w')
+    txtfile.write(content)
+    txtfile.close
+
+getPDFContent("/Users/eduardofranco/Documents/NYU/Python_BootCamp/test0.pdf") #.encode("ascii", "ignore") if using print
