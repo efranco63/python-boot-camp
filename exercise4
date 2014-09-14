@@ -1,3 +1,4 @@
+#Exercise 4: download all the pdfs from http://oag.ca.gov/missing/stats
 import requests #pip install
 from unidecode import unidecode
 import lxml.html #pip install
