@@ -1,0 +1,22 @@
+#Exercise 2: write a web scraper that gets all the links on http://www.techmeme.com/
+import requests #pip install
+from unidecode import unidecode
+import lxml.html #pip install
+p = "http://www.techmeme.com/"
+r = requests.get(p)
+#print type(r.text)
+text = unidecode(r.text)
+#print type(text)
+
+html_obj = lxml.html.fromstring(text)
+links = html_obj.xpath("//a")
+links_values = [elem.values() for elem in links]
+links_l = []
+for i in links_values:
+    for item in i:
+        if 'http' in item:
+            links_l.append(item)
+links_l = sorted(links_l)
+for i in links_l:
+    if 'google' in i:
+        print i
