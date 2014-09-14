@@ -1,3 +1,5 @@
+#Exercises 8-12: parse all the pdfs from exercise 4-8 and write the parsed data to a .txt file for each pdf you parse.  
+#Please use the same names for each .pdf to .txt
 import pyPdf
 
 def getPDFContent(path):
